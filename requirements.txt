@@ -1,0 +1,3 @@
+markitdown[pdf,docx,pptx,xlsx]
+flask
+python-dotenv
