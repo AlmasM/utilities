@@ -15,11 +15,13 @@ def create_app() -> Flask:
     app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # 20 MB
 
     # Register blueprints — add new api/ modules here
-    from api.convert import convert_bp
     from api.health import health_bp
-    from api.translate import translate_bp
+    from api.image.detect import detect_bp
+    from api.text.convert import convert_bp
+    from api.text.translate import translate_bp
 
     app.register_blueprint(convert_bp)
+    app.register_blueprint(detect_bp)
     app.register_blueprint(health_bp)
     app.register_blueprint(translate_bp)
 
