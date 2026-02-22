@@ -16,14 +16,17 @@ def create_app() -> Flask:
 
     # Register blueprints — add new api/ modules here
     from api.health import health_bp
-    # from api.image.detect import detect_bp # Only run locally
     from api.text.convert import convert_bp
     from api.text.translate import translate_bp
 
     app.register_blueprint(convert_bp)
-    # app.register_blueprint(detect_bp) # Only run locally
     app.register_blueprint(health_bp)
     app.register_blueprint(translate_bp)
+
+    # api/image/ blueprints: only when running locally (not on Vercel). Add any new image/ modules here.
+    if not os.environ.get("VERCEL"):
+        from api.image.detect import detect_bp
+        app.register_blueprint(detect_bp)
 
     return app
 
